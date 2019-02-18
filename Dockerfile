@@ -1,7 +1,6 @@
 FROM debian:stretch
 
-RUN apt-get -qq update && apt-get install -qq -y mosquitto mosquitto-clients && \
-    adduser --system --disabled-password --disabled-login mosquitto
+RUN apt-get -qq update && apt-get install -qq -y mosquitto mosquitto-clients
 
 COPY config /etc/mosquitto
 VOLUME ["/etc/mosquitto"]
