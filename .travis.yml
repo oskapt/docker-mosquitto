@@ -8,3 +8,7 @@ jobs:
         - docker build -t mosquitto .
       script:
         - docker run --rm mosquitto -h | grep version
+
+notifications:
+  webhooks:
+    - https://mm.monach.us/hooks/7ig8rwoeeiyb7cocwmjxhbb9ao
