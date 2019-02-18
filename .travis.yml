@@ -8,4 +8,5 @@ jobs:
         - docker build -t mosquitto .
       script:
         - docker run --rm mosquitto -h | grep version
+        - docker run --rm mosquitto echo foo | grep foo
 
