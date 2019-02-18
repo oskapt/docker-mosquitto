@@ -7,4 +7,4 @@ jobs:
       install:
         - docker build -t mosquitto .
       script:
-        - docker run --rm mosquitto help | grep version
+        - docker run --rm mosquitto -h | grep version
