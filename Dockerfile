@@ -1,14 +1,16 @@
 FROM debian:stretch
 
-ENV MQTT_CONFIG /mqtt/config/mosquitto.conf
+ENV MQTT_CONFIG_DIR /mqtt/config
+ENV MQTT_CONFIG $MQTT_CONFIG_DIR/mosquitto.conf
+ENV MQTT_DATA_DIR /mqtt/data
 
 RUN apt-get -qq update && apt-get install -qq -y mosquitto mosquitto-clients && \
     adduser --system --disabled-password --disabled-login mosquitto
 
-RUN mkdir -p /usr/share/mosquitto/config /mqtt/config /mqtt/data /mqtt/log
-COPY config /usr/share/mosquitto/config
-RUN chown -R mosquitto:mosquitto /mqtt
-VOLUME ["/mqtt/config", "/mqtt/data", "/mqtt/log"]
+RUN mkdir -p /mqtt/config /mqtt/data
+COPY config $MQTT_CONFIG_DIR
+RUN chown -R mosquitto:mosquitto $MQTT_CONFIG_DIR $MQTT_DATA_DIR
+VOLUME ["$MQTT_CONFIG_DIR", "$MQTT_DATA_DIR"]
 
 EXPOSE 1883 9001
 
