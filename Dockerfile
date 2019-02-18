@@ -1,5 +1,7 @@
 FROM debian:stretch
 
+ENV MQTT_CONFIG /mqtt/config/mosquitto.conf
+
 RUN apt-get -qq update && apt-get install -qq -y mosquitto mosquitto-clients && \
     adduser --system --disabled-password --disabled-login mosquitto
 
@@ -13,4 +15,4 @@ EXPOSE 1883 9001
 ADD docker-entrypoint.sh /usr/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["/usr/sbin/mosquitto", "-c", "/mqtt/config/mosquitto.conf"]
+CMD ["/usr/sbin/mosquitto", "-c", "$MQTT_CONFIG"]
