@@ -1,0 +1,10 @@
+---
+jobs:
+  include:
+    - stage: test
+      services:
+        - docker
+      install:
+        - docker build -t mosquitto .
+      script:
+        - docker run --rm mosquitto help | grep version
